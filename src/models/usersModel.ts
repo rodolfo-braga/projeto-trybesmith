@@ -26,7 +26,17 @@ const findByUsernameAndPassword = async (username: string, password: string): Pr
   return result[0] as IUser;
 };
 
+const findById = async (id: number): Promise<IUser> => {
+  const [result] = await connection.execute<RowDataPacket[]>(
+    'SELECT * FROM Trybesmith.Users WHERE id = ?',
+    [id],
+  );
+
+  return result[0] as IUser;
+};
+
 export default {
   create,
   findByUsernameAndPassword,
+  findById,
 };

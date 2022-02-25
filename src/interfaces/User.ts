@@ -3,12 +3,12 @@ export interface UserLogin {
   password: string,
 }
 
-export interface IUser extends UserLogin {
+export interface User extends UserLogin {
   classe: string,
   level: number,
 }
 
-export interface User extends IUser {
+export interface IUser extends User {
   id: number,
   error?: {
     code: string,

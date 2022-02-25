@@ -1,14 +1,17 @@
 import express from 'express';
-import loginRouter from './controllers/loginController';
-import usersRouter from './controllers/usersController';
+import 'express-async-errors';
+import login from './controllers/loginController';
 import errorHandler from './middlewares/error';
+import productsRouter from './routers/products';
+import usersRouter from './routers/users';
 
 const app = express();
 
 app.use(express.json());
 
+app.use('/login', login);
 app.use('/users', usersRouter);
-app.use('/login', loginRouter);
+app.use('/products', productsRouter);
 
 app.use(errorHandler);
 

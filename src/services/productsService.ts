@@ -7,6 +7,13 @@ const create = async (product: Product) => {
   return newProduct;
 };
 
+const findAll = async () => {
+  const products = await productsModel.findAll();
+
+  return products;
+};
+
 export default {
   create,
+  findAll,
 };

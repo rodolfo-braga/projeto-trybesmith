@@ -12,6 +12,13 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   return res.status(StatusCode.CREATED).json(newProduct);
 };
 
+const findAll = async (req: Request, res: Response) => {
+  const products = await productsService.findAll();
+
+  return res.status(StatusCode.OK).json(products);
+};
+
 export default {
   create,
+  findAll,
 };

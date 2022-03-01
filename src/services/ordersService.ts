@@ -1,5 +1,4 @@
-import { Error } from '../interfaces/Error';
-import { Order } from '../interfaces/Order';
+import { IOrder, Order } from '../interfaces/Order';
 import { IUser } from '../interfaces/User';
 import ordersModel from '../models/ordersModel';
 
@@ -10,15 +9,22 @@ const create = async (order: Order, user: IUser) => {
   return newOrder;
 };
 
-const findOne = async (id: number) => {
-  const order = await ordersModel.findOne(id);
+const findById = async (id: number) => {
+  const order = await ordersModel.findById(id);
   
-  if (!order) return { error: { code: 'NOT_FOUND', message: 'Order not found' } } as Error;
+  if (!order) return { error: { code: 'NOT_FOUND', message: 'Order not found' } } as IOrder;
 
   return order;
 };
 
+const findAll = async () => {
+  const orders = await ordersModel.findAll();
+
+  return orders;
+};
+
 export default {
   create,
-  findOne,
+  findById,
+  findAll,
 };

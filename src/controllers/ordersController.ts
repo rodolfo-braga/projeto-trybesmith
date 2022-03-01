@@ -12,16 +12,23 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   return res.status(StatusCode.CREATED).json(newOrder);
 };
 
-const findOne = async (req: Request, res: Response, next: NextFunction) => {
+const findById = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
 
-  const order = await ordersService.findOne(Number(id));
+  const order = await ordersService.findById(Number(id));
   if (order.error) return next(order.error);
 
   return res.status(StatusCode.OK).json(order);
 };
 
+const findAll = async (req: Request, res: Response) => {
+  const orders = await ordersService.findAll();
+
+  return res.status(StatusCode.OK).json(orders);
+};
+
 export default {
   create,
-  findOne,
+  findById,
+  findAll,
 };

@@ -17,6 +17,8 @@ const validateJwt = async (req: Request, res: Response, next: NextFunction) => {
       return res.status(StatusCode.UNAUTHORIZED).json({ error: 'Invalid token' });
     }
 
+    req.user = user;
+
     next();
   } catch (err) {
     return res.status(StatusCode.UNAUTHORIZED).json({ error: 'Invalid token' });
@@ -24,3 +26,8 @@ const validateJwt = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default validateJwt;
+
+/*
+Referência para acrescentar propriedade 'user' ao type Request:
+https://stackoverflow.com/questions/37377731/extend-express-request-object-using-typescript
+*/

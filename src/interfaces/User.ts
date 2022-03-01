@@ -1,4 +1,5 @@
 import { JwtPayload } from 'jsonwebtoken';
+import { Error } from './Error';
 
 export interface UserLogin {
   username: string,
@@ -10,12 +11,8 @@ export interface User extends UserLogin {
   level: number,
 }
 
-export interface IUser extends User {
+export interface IUser extends User, Error {
   id: number,
-  error?: {
-    code: string,
-    message: string,
-  }
 }
 
 export interface Payload extends JwtPayload {

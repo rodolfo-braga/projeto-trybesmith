@@ -12,6 +12,16 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   return res.status(StatusCode.CREATED).json(newOrder);
 };
 
+const findOne = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  const order = await ordersService.findOne(Number(id));
+  if (order.error) return next(order.error);
+
+  return res.status(StatusCode.OK).json(order);
+};
+
 export default {
   create,
+  findOne,
 };

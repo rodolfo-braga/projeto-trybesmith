@@ -1,4 +1,5 @@
 import { JwtPayload } from 'jsonwebtoken';
+import { RowDataPacket } from 'mysql2';
 import { Error } from './Error';
 
 export interface UserLogin {
@@ -20,4 +21,8 @@ export interface Payload extends JwtPayload {
     id: number,
     username: string,
   }
+}
+
+export interface UserId extends RowDataPacket {
+  userId: number,
 }

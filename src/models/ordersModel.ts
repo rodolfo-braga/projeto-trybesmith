@@ -23,7 +23,7 @@ const create = async (order: Order, userId: number): Promise<NewOrder> => {
   } };
 };
 
-const findOne = async (id: number): Promise<IOrder | null> => {
+const findById = async (id: number): Promise<IOrder | null> => {
   const [result] = await connection.execute<UserId[]>(
     'SELECT userId FROM Trybesmith.Orders WHERE id = ?',
     [id],
@@ -43,7 +43,16 @@ const findOne = async (id: number): Promise<IOrder | null> => {
   return { id, userId, products } as IOrder;
 };
 
+const findAll = async (): Promise<IOrder[]> => {
+  const [result] = await connection.query<RowDataPacket[]>('SELECT id FROM Trybesmith.Orders');
+
+  const orders = await Promise.all(result.map(async ({ id }) => findById(id)));
+
+  return orders as IOrder[];
+};
+
 export default {
   create,
-  findOne,
+  findById,
+  findAll,
 };

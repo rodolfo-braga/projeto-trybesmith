@@ -1,4 +1,5 @@
 import { RowDataPacket } from 'mysql2';
+import { Error } from './Error';
 
 export interface Order {
   products: number[],
@@ -7,6 +8,7 @@ export interface Order {
 export interface IOrder extends Order, RowDataPacket {
   id: number,
   userId: number,
+  error?: Error,
 }
 
 export interface NewOrder {

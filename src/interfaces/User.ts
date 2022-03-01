@@ -12,8 +12,9 @@ export interface User extends UserLogin {
   level: number,
 }
 
-export interface IUser extends User, Error {
+export interface IUser extends User {
   id: number,
+  error?: Error,
 }
 
 export interface Payload extends JwtPayload {

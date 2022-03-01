@@ -6,6 +6,7 @@ const ordersRouter = express.Router();
 
 ordersRouter
   .post('/', validateJwt, ordersController.create)
-  .get('/:id', validateJwt, ordersController.findOne);
+  .get('/:id', validateJwt, ordersController.findById)
+  .get('/', validateJwt, ordersController.findAll);
 
 export default ordersRouter;
